@@ -75,6 +75,9 @@
     <Content Include="Scripts\jquery.easing.1.3.js" />
     <Content Include="snow.html" />
     <Content Include="snowflake1.png" />
+    <Content Include="snowflake2.png" />
+    <Content Include="snowflake3.png" />
+    <Content Include="snowflake4.png" />
     <Content Include="StyleSheet.css" />
     <Content Include="Scripts\velocity.js" />
     <Content Include="Scripts\velocity.min.js" />

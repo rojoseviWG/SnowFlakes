@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Snowflake</title>
-    <link href="StyleSheet.css?version=1.14" rel="stylesheet" />
+    <link href="StyleSheet.css?version=1.17" rel="stylesheet" />
     <script src="Scripts/jquery-2.1.1.js"></script>
     <script src="Scripts/jquery.easing.1.3.js"></script>
 
@@ -20,16 +20,29 @@
 
         function createflake()
         {
-            var imgleft = 10
+            var stageheight = $(window.top).height();
+            var stagewidth = $(window.top).width();
+            var imgleft = 10;
+
             for (i = 1; i < 11; i++)
             {
                 var imgleft = 10 * rand(1, 100);
+                var imgfile = rand(1, 4);
+                var imgsize = rand(10, 20);
                 //imgleft = imgleft + (i * 10);
                 $("body").append("<div id='divsnfl" + i + "' class='divsnfl'>&nbsp;</div>");
                 $("#divsnfl" + i).css({ "left": imgleft });
-                $("#divsnfl" + i).append("<img id='img" + i + "' class='cssimg' src='snowflake1.png' height='15' width ='15' />");
+                $("#divsnfl" + i).append("<img id='img" + i + " ' src='snowflake" + imgfile + ".png'  class='cssimg' height='" + imgsize + "' width ='" + imgsize + "' />");
+                //$("#img").attr("src", "snowflake2.png");
+                //$("#img").attr("src", 'snowflake2.png?' + new Date().getTime());
                 
-                moveimg($("#divsnfl" + i), imgleft);
+                    moveimg($("#divsnfl" + i)
+                        , rand(1, stagewidth) //left starting position
+                        , stageheight - 50 // bottom finishing position
+                        , rand(7000, 15000) //speed
+                    );
+
+
             }
         }
 
@@ -38,13 +51,12 @@
         }
 
 
-        function moveimg(ename, startleft)
+        function moveimg(ename, startleft, endbottom, speed)
         {
 
-            var stageheight = $(window.top).height();
-            var stagewidth = $(window.top).width();
+
             var starttop = 0;
-            var endtop = stageheight/2;
+            var endtop = endbottom;
             var endleft = startleft + 10;
 
             $(ename).css({ "left": startleft})
@@ -52,12 +64,12 @@
             $(ename).velocity(
                 { top: endtop, left: endleft }
                 ,   {
-                        duration: 7000
+                        duration: speed
                         , easing: 'linear'
                         , complete: function () {
                             ename.css({ top: starttop, left: startleft });
                             pause = 0;
-                            moveimg(ename, startleft);
+                            moveimg(ename, startleft, endbottom, speed);
                         }
                     }
                 );
@@ -66,6 +78,8 @@
     </script>
 </head>
 <body>
-    <!--<div id="divsnfl" style="position:absolute;background-color:purple" ><img class="clssnfl" width="15" height="15" src="snowflake1.png" /></div>-->
+    
+    <!--<div id="divsnfl" style="position:absolute;" ><img src="snowflake2.png" />
+    </div>-->
 </body>
 </html>
